@@ -1,116 +1,110 @@
+function getComputerChoice() {
+    var c = Math.floor(Math.random() * 3);
+    if (c == 0) {
+        return "r";
+    }
+    else if (c == 1) {
+        return "p";
+    }
+    else if (c == 2) {
+        return "s";
+    }
+}
+
+var words = document.querySelector(".words")
+
+
+
+var h;
+var c;
+
+let hcard = document.querySelector(".hum");
+let ccard = document.querySelector(".com");
+
+let r = document.querySelector(".r")
+let p = document.querySelector(".p")
+let s = document.querySelector(".s")
+
 var humanScore = 0;
 var computerScore = 0;
 
-function getHumanChoice() {
-    var h = prompt("Choose Rock, Paper or scissors");
+function match(h) {
 
-    return h.toLowerCase();
-}
+    if (humanScore < 5 && computerScore < 5) {
+        var humanScore = 0;
+        var computerScore = 0;
 
+        r.addEventListener("click", event => {
+            h = "r"
+            hcard.textContent = "✊"
+            c = getComputerChoice();
 
-function getComputerChoice() {
-    var c = Math.floor(Math.random() * 3);
-    if (c==0){
-        return "rock";
-    }
-    else if (c==1){
-        return "paper";
-    }
-    else if (c==2){
-        return "scissors";
-    }
-}
+            if (c == "r") {
+                ccard.textContent = "✊"
+                words.textContent = "It's a Tie"
+            }
 
-function playRound(getHumanChoice, getComputerChoice){
-    const hum = getHumanChoice();
-    const com =getComputerChoice();
+            if (c == "p") {
+                ccard.textContent = "🖐"
+                words.textContent = "You Lose this One"
+                computerScore++
+            }
 
-    console.log("Your choice: " + hum);
-    console.log("Computer Choice: " + com);
-    
-    
-    if (hum == com){
-        return "Tie!";
-    }
-    else if (hum =="rock" && com =="scissors"){
-        return "You Win!";
-    }
-    else if (hum == "paper" && com =="rock"){
-        return "You Win!";
-    }
-    else if (hum == "scissors" && com =="paper"){
-        return "You Win!";
-    }
-    else{
-        return "You Lose!";
-    }
-}
+            if (c == "s") {
+                ccard.textContent = "✌️"
+                words.textContent = "You Win This Round"
+                humanScore++
+            }
+        })
 
 
+        p.addEventListener("click", event => {
+            h = "p"
+            hcard.textContent = "🖐"
+            c = getComputerChoice();
 
-function playGame(){
-    var result = playRound(getHumanChoice, getComputerChoice);
-    if (result=="You Win!"){
-        humanScore ++;
-        console.log("Round 1 Winner: You!");
-    }
-    else if (result == "You Lose!"){
-        computerScore ++;
-        console.log("Round Winner: Computer!");
-    }
-    
+            if (c == "r") {
+                ccard.textContent = "✊"
+                words.textContent = "You Win This Round"
+                humanScore++
 
-    result = playRound(getHumanChoice, getComputerChoice);
-    if (result=="You Win!"){
-        humanScore ++;
-        console.log("Round 2 Winner: You!");
-    }
-    else if (result == "You Lose!"){
-        computerScore ++;
-        console.log("Round Winner: Computer!");
-    }
-    
+            }
 
-    result = playRound(getHumanChoice, getComputerChoice);
-    if (result=="You Win!"){
-        humanScore ++;
-        console.log("Round 3 Winner: You!");
-    }
-    else if (result == "You Lose!"){
-        computerScore ++;
-        console.log("Round Winner: Computer!");
-    }
-    
+            if (c == "p") {
+                ccard.textContent = "🖐"
+                words.textContent = "It'a a Tie"
+            }
 
-    result = playRound(getHumanChoice, getComputerChoice);
-    if (result=="You Win!"){
-        humanScore ++;
-        console.log("Round 4 Winner: You!");
-    }
-    else if (result == "You Lose!"){
-        computerScore ++;
-        console.log("Round Winner: Computer!");
-    }
-    
+            if (c == "s") {
+                ccard.textContent = "✌️"
+                words.textContent = "You Lose this one"
+                computerScore++
+            }
+        })
 
-    result = playRound(getHumanChoice, getComputerChoice);
-    if (result=="You Win!"){
-        humanScore ++;
-        console.log("Round 5 Winner: You!");
-    }
-    else if (result == "You Lose!"){
-        computerScore ++;
-        console.log("Round Winner: Computer!");
-    }
-    console.log("Your Score: " + humanScore);
-    console.log("Computer Score: " + computerScore);
-    if (humanScore>computerScore){
-        console.log("YOU WON!!!");
-    }
-    else{
-        console.log("YOU LOOSE!!!");
-        
+        s.addEventListener("click", event => {
+            h = "s"
+            hcard.textContent = "✌️"
+            c = getComputerChoice();
+
+            if (c == "r") {
+                ccard.textContent = "✊"
+                words.textContent = "You Lose this One"
+                computerScore++
+            }
+
+            if (c == "p") {
+                ccard.textContent = "🖐"
+                words.textContent = "You Win This Round"
+                humanScore++
+
+            }
+
+            if (c == "s") {
+                ccard.textContent = "✌️"
+                words.textContent = "It's a Tie"
+            }
+        })
     }
 }
 
-playGame();
